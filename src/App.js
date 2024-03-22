@@ -1,10 +1,32 @@
+import { useState } from "react";
+
 const App = () => {
+  const [text, setText] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  console.log("messages", messages);
+
+  const getResponse = async () => {
+    const response = await fetch(`http://localhost:8000/prompt/${text}`);
+    const data = await response.json();
+    console.log("data", data);
+    setMessages([
+      ...messages,
+      {
+        author: data.messages[0].content,
+        bot: data.candidates[0].content,
+      },
+    ]);
+  };
+
+  console.log(text);
+
   return (
     <div className="chat-bot">
       <div className="chat-header">
         <div className="info-container">
           <h3>Chat with</h3>
-          <h2>Gemini Bot</h2>
+          <h2>PaLM 2 Bot</h2>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
@@ -15,11 +37,15 @@ const App = () => {
         </svg>
       </div>
       <div className="feed">
-        <div className="questions bubble"></div>
-        <div className="response bubble"></div>
+        {messages?.map((message, _index) => (
+          <div key={_index}>
+            <div className="question bubble">{message.author}</div>
+            <div className="response bubble">{message.bot}</div>
+          </div>
+        ))}
       </div>
-      {/* <textarea value={} onChange={}/> */}
-      {/* <button onClick={}>⇾</button> */}
+      <textarea value={text} onChange={(e) => setText(e.target.value)} />
+      <button onClick={getResponse}>⇨</button>
     </div>
   );
 };
