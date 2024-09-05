@@ -4,22 +4,18 @@ const App = () => {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
 
-  console.log("messages", messages);
-
   const getResponse = async () => {
-    const response = await fetch(`http://localhost:8000/prompt/${text}`);
+    const response = await fetch(`http://localhost:8000/${text}`);
     const data = await response.json();
     console.log("data", data);
     setMessages([
       ...messages,
       {
-        author: data.messages[0].content,
-        bot: data.candidates[0].content,
+        author: text,
+        bot: data,
       },
     ]);
   };
-
-  console.log(text);
 
   return (
     <div className="chat-bot">
