@@ -16,8 +16,8 @@ h3 {
 
 .chat-bot {
   position: relative;
-  height: 500px;
-  width: 400px;
+  height: 100vh;
+  width: 100vw;
   background-color: rgb(255, 255, 255);
   border-radius: 20px 20px 0 0;
   margin: 20px 20px 0 20px;
@@ -30,6 +30,7 @@ h3 {
   background: linear-gradient(rgb(22, 197, 141), rgb(6, 120, 84));
   padding: 25px;
   color: rgb(244, 244, 244);
+  text-align: center;
 }
 
 textarea {
@@ -59,7 +60,7 @@ button {
 }
 
 .bubble {
-  width: 250px;
+  width: 750px;
   padding: 20px;
   margin: 10px 25px;
   border-radius: 10px;
@@ -85,6 +86,6 @@ button {
   bottom: 82px;
   left: 0;
   width: 100%;
-  height: 250px;
+  height: 600px;
   overflow-y: scroll;
 }
